@@ -124,7 +124,6 @@ namespace sauce
         }
         else
         {
-          std::cout<<"file "+fn+" exists"<<std::endl;
         }
       }
       std::string get_tags(void)
@@ -183,7 +182,6 @@ namespace sauce
         }
         else
         {
-          std::cout<<"file "+fn+" exists"<<std::endl;
         }
       }
       std::string get_tags(void)
@@ -304,7 +302,7 @@ namespace sauce
         {
           file_path = param_file_path;
           file_name = extract_file_name(file_path);
-          output_file_name = "saucenao-"+file_name+".json";
+          output_file_name = "db/saucenao-"+file_name+".json";
         }
         std::string get_output_file_name(void)
         {
@@ -440,7 +438,6 @@ namespace sauce
           std::ifstream ftest(str_output_file_name.c_str());
           if(ftest.good())
           {
-            std::cout<<"file "<<str_output_file_name<<" exists"<<std::endl;
             return 0;
           }
           //-----------
@@ -456,7 +453,8 @@ namespace sauce
          
           curl = curl_easy_init();
           FILE * file = fopen(output_file_name, "w");
-          curl_easy_setopt(curl,CURLOPT_VERBOSE,1L);
+          curl_easy_setopt(curl,CURLOPT_VERBOSE,0);
+		  curl_easy_setopt(curl,CURLOPT_NOSIGNAL,1);
           curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
           if(curl) {
             form = curl_mime_init(curl);
