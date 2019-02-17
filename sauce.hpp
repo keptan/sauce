@@ -99,7 +99,7 @@ namespace sauce
       {
           id_num = param_id_num;
           target_url+=id_num+".json";
-          fn = id_num + "-danbooru.json";
+          fn = "db/" + id_num + "-danbooru.json";
           std::ifstream ftest(fn.c_str());
           file_exists = ftest.good();
       }
@@ -113,7 +113,8 @@ namespace sauce
           CURL * easyhandle;
           CURLcode res;
           easyhandle = curl_easy_init();
-          curl_easy_setopt(easyhandle,CURLOPT_VERBOSE,1L);
+          curl_easy_setopt(easyhandle,CURLOPT_VERBOSE,0L);
+
           curl_easy_setopt(easyhandle,CURLOPT_URL, my_url);
           FILE * fp = fopen(my_fn,"w");
           curl_easy_setopt(easyhandle, CURLOPT_WRITEDATA, fp);
@@ -157,7 +158,7 @@ namespace sauce
       {
           id_num = param_id_num;
           target_url+=id_num;
-          fn = id_num + "-gelbooru.xml";
+          fn ="db/" +  id_num + "-gelbooru.xml";
           std::ifstream ftest(fn.c_str());
           file_exists = ftest.good();
       }
@@ -171,7 +172,7 @@ namespace sauce
           CURL * easyhandle;
           CURLcode res;
           easyhandle = curl_easy_init();
-          curl_easy_setopt(easyhandle,CURLOPT_VERBOSE,1L);
+          curl_easy_setopt(easyhandle,CURLOPT_VERBOSE,0L);
           curl_easy_setopt(easyhandle,CURLOPT_URL, my_url);
           FILE * fp = fopen(my_fn,"w");
           curl_easy_setopt(easyhandle, CURLOPT_WRITEDATA, fp);
@@ -453,7 +454,7 @@ namespace sauce
          
           curl = curl_easy_init();
           FILE * file = fopen(output_file_name, "w");
-          curl_easy_setopt(curl,CURLOPT_VERBOSE,0);
+          curl_easy_setopt(curl,CURLOPT_VERBOSE,0L);
 		  curl_easy_setopt(curl,CURLOPT_NOSIGNAL,1);
           curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
           if(curl) {
